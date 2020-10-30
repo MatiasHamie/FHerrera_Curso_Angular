@@ -1,0 +1,17 @@
+<div class="card animated fadeIn fast">
+    <img [src]="heroe.img" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">{{ heroe.nombre }}</h5>
+        <p class="card-text">{{ heroe.bio }}</p>
+        <p class="card-text"><small class="text-muted"> {{ heroe.aparicion }} </small></p>
+
+        <button (click)="verHeroe(i)" type="button" class="btn btn-outline-primary btn-block">Ver mas</button>
+
+        <!-- Importante! si ponemos asi [routerLink]="['ruta', parametroN]" no va a funcionar,
+            porque no es relativo el path desde donde estamos, la ruta en si deberia ser (en este caso)
+            heroes/heroe/numeroIndex pero si lo ponemos MAL como en el ejemplo comentado, la ruta quedaria
+            localhost:4200/heroe/numeroIndex, y como esa ruta no es la que queremos salta el path: '**'
+            Se soluciona poniendo el /heroe-->
+        <!-- <a [routerLink]="['/heroe',i]" class="btn btn-outline-primary btn-block">Ver mas link...</a> -->
+    </div>
+</div>

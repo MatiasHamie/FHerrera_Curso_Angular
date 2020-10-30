@@ -1,0 +1,222 @@
+<h1 class="mt-3">
+    Pipes <small>Angular</small>
+    <hr>
+</h1>
+
+<div class="row">
+    <div class="col">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Variable</th>
+                    <th>Pipe</th>
+                    <th>Salida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ nombre2 }}</td>
+                    <td>Capitalizado</td>
+                    <td>{{ nombre2 | capitalizado:false }}</td>
+                </tr>
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>uppercase</td>
+                    <td>{{ nombre | uppercase }}</td>
+                </tr>
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>lowercase</td>
+                    <td>{{ nombre | lowercase }}</td>
+                </tr>
+                <!-- El slice requiere un parametro por lo menos
+                    slice:cantidad de posiciones que quiero q saque -->
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>slice:3</td>
+                    <td>{{ nombre | slice:3 }}</td>
+                </tr>
+                <!-- ahora con 2 parametros, slice:inicio:fin
+                    slice:0:3 es "mostrar desde la posicion 0 del string
+                    hasta la 3" -->
+                <tr>
+                    <td>{{ nombre }}</td>
+                    <td>slice:0:3</td>
+                    <td>{{ nombre | slice:0:3 }}</td>
+                </tr>
+                <tr>
+                    <td>{{ array }}</td>
+                    <td>slice:1:5</td>
+                    <td>{{ array | slice:1:5 }}</td>
+                </tr>
+                <!-- number:'1.0-0' le estoy diciendo que quiero 1 digito antes de la coma
+                y ninguno despues (el 0-0 es la forma de decirle ninguno) -->
+                <tr>
+                    <td>{{ PI }}</td>
+                    <td>number:'3.0-0'</td>
+                    <td>{{ PI | number:'3.0-0' }}</td>
+                </tr>
+                <!-- dame todos los enteros pero la parte decimal dame 2 -->
+                <tr>
+                    <td>{{ PI }}</td>
+                    <td>number:'.0-2'</td>
+                    <td>{{ PI | number:'.0-2' }}</td>
+                </tr>
+                <tr>
+                    <td>{{ porcentaje }}</td>
+                    <td>percent</td>
+                    <td>{{ porcentaje | percent }}</td>
+                </tr>
+                <tr>
+                    <td>{{ porcentaje }}</td>
+                    <td>percent:'2.2-2'</td>
+                    <td>{{ porcentaje | percent:'2.2-2' }}</td>
+                </tr>
+                <tr>
+                    <td>{{ salario }}</td>
+                    <td>currency</td>
+                    <td>{{ salario | currency }}</td>
+                </tr>
+                <!-- Para sacar los codigos de cada pais de 3 caracteres
+                     https://en.wikipedia.org/wiki/ISO_4217 es el mismo link
+                     del ISO 4127 del angular.io currency pipes
+                     -->
+                <tr>
+                    <td>{{ salario }}</td>
+                    <td>currency:'EUR'</td>
+                    <td>{{ salario | currency:'EUR' }}</td>
+                </tr>
+                <!-- En todo lo que sea numero, el formato se le da con
+                      cantEnteros.MinCantDecimales-MaxCantDecimales
+                      Si en cantidad de enteros no pongo nada, me muestra los q hayan
+                      Si quiero mas espacio entre el simbolo de moneda y el valor
+                      solo agrego un espacio a 'CAD ' <- asi o 'CAD$ '
+                    -->
+                <tr>
+                    <td>{{ salario }}</td>
+                    <td>currency:'CAD$ ':'symbol':'.0-0'</td>
+                    <td>{{ salario | currency:'CAD$ ':'symbol':'.0-0' }}</td>
+                </tr>
+                <!-- Si la promesa falla, no vamos a ver la info, solo un error en el
+                      console.log() -->
+                <tr>
+                    <td>{{ valorPromesa }}</td>
+                    <td>async</td>
+                    <td>{{ valorPromesa | async }}</td>
+                </tr>
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>date</td>
+                    <td>{{ fecha | date }}</td>
+                </tr>
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>date:'medium'</td>
+                    <td>{{ fecha | date:'medium' }}</td>
+                </tr>
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>date:'short'</td>
+                    <td>{{ fecha | date:'short' }}</td>
+                </tr>
+                <!-- esto ya es personalizado, jugando con la guia de angular.io
+                      ya se que MMMM muestra el string del mes completo por ejemplo... -->
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>date:'MMMM - dd'</td>
+                    <td>{{ fecha | date:'MMMM - dd' }}</td>
+                </tr>
+                <!-- Si quiero que este en ingles, agrego :'':'en'
+                     donde 'en' es el idioma ingles -->
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>date:'MMMM - dd':'':'en'</td>
+                    <td>{{ fecha | date:'MMMM - dd':'':'en' }}</td>
+                </tr>
+                <!-- Si quiero que este frances (por ejemplo) no puedo
+                    agregar solamente :'':'fr' asi nomas -->
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>date:'MMMM - dd':'':'fr'</td>
+                    <td>{{ fecha | date:'MMMM - dd':'':'fr' }}</td>
+                </tr>
+                <tr>
+                    <td>{{ fecha }}</td>
+                    <td>
+                        date:'MMMM - dd':'':'{{ varIdioma }}'<br>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary mr-1" (click)="varIdioma='es'">Español</button>
+                            <button type="button" class="btn btn-secondary mr-1" (click)="varIdioma='en'">Ingles</button>
+                            <button type="button" class="btn btn-secondary mr-1" (click)="varIdioma='fr'">Frances</button>
+                        </div>
+                    </td>
+                    <td>{{ fecha | date:'MMMM - dd':'':varIdioma }}</td>
+                </tr>
+                <!-- tarea -->
+                <tr>
+                    <td>{{ nombreAsteriscos }}</td>
+                    <td>
+                        asteriscos:{{ activar }}
+                        <br>
+                        <button class="btn btn-outline-primary" (click)="activar = !activar">Activar/Desactivar</button>
+                    </td>
+
+                    <td>{{ nombreAsteriscos | asteriscos:activar }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Slice *ngFor="let item of array | slice:5:20"</h4>
+        <hr>
+        <ul>
+            <!--
+            (Tambien se puede poner el slice a una directiva)
+            Puedo poner un numero q todavia no existe, por ejemplo
+            el array de ejemplo q hice, tiene del 1 al 10 nomas, (posiciones de 0 a 9)
+            Pero quiero poner q me muestre desde la pos 5 hasta la 99, no hay drama
+            no hay informacion, pero a medida que se va incrementando el valor del array
+            la va mostrando hasta lo que yo quiero-->
+            <li *ngFor="let item of array | slice:5:20"> {{ item }}</li>
+        </ul>
+
+        <h3>objeto | json</h3>
+        <hr>
+        <!-- A veces puede tirar error, por ejemplo cuando hay funciones en el objeto y el pipe
+        no las puede interpretar correctamente -->
+        <div class="row mb-5">
+            <div class="col">
+                <!-- la etiqueta html pre te sirve para ver un poco mejor los json -->
+                <pre>
+                {{ heroe | json }}
+              </pre>
+            </div>
+        </div>
+
+        <!--
+          Esto tira este error en la consola de chrome
+
+          core.js:4197 ERROR Error: unsafe value used in
+          a resource URL context (see http://g.co/ng/security#xss)
+          at ɵɵsanitizeResourceUrl (core.js:5008)
+          at elementPropertyInternal (core.js:7713)
+          at Module.ɵɵproperty (core.js:13811)
+          at AppComponent_Template (app.component.html:188)
+          at executeTemplate (core.js:7303)
+          at refreshView (core.js:7172)
+          at refreshComponent (core.js:8326)
+          at refreshChildComponents (core.js:6965)
+          at refreshView (core.js:7222)
+          at renderComponentOrTemplate (core.js:7286)
+
+          Te esta avisando que es un link potencialmente inseguro, PERO si estamos confiados de que
+          no hay ningun drama hacemos un pipe personalizado
+         -->
+        <h3>DOM Seguro</h3>
+        <hr>
+        <div class="row mb-5">
+            <div class="col">
+                <iframe width="560" height="315" [src]="videoUrl | domseguro" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>
